@@ -59,7 +59,10 @@ finally:
     print(results_final)
 
 
-
+file = open('results.json', mode= 'w+', encoding='utf-8')
+print('----> results')
+for r in results_final:
+    file.write(json.dumps(r)+",\n")
 
 
 

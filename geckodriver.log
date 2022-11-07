@@ -2854,3 +2854,22 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 1667841887167	Marionette	INFO	Stopped listening on port 64117
 console.warn: services.settings: main/partitioning-exempt-urls sync interrupted by shutdown
 JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 719: Error: Phase "Sqlite.jsm: wait until all connections are closed" is finished, it is too late to register completion condition "protections.sqlite#0: waiting for shutdown"
+1667843088302	geckodriver	INFO	Listening on 127.0.0.1:52984
+1667843091348	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\str8_\\AppData\\Local\\Temp\\rust_mozprofilefZuElk"
+1667843092064	Marionette	INFO	Marionette enabled
+1667843092077	Marionette	INFO	Listening on port 52994
+1667843092480	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\str8_\\AppData\\Local\\Temp\\rust_mozprofilefZuElk\\search.json.mozlz4", (void 0)))
+1667843131388	Marionette	INFO	Stopped listening on port 52994
+[Parent 15628, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1108: Error: Sqlite.jsm has been shutdown. Cannot open connection to: C:\Users\str8_\AppData\Local\Temp\rust_mozprofilefZuElk\protections.sqlite
+[Parent 15628, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:723
+1667843166557	geckodriver	INFO	Listening on 127.0.0.1:53230
+1667843169601	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\str8_\\AppData\\Local\\Temp\\rust_mozprofilegd7Z9A"
+1667843170187	Marionette	INFO	Marionette enabled
+1667843170198	Marionette	INFO	Listening on port 53240
+1667843170820	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\str8_\\AppData\\Local\\Temp\\rust_mozprofilegd7Z9A\\search.json.mozlz4", (void 0)))
+1667843187460	Marionette	INFO	Stopped listening on port 53240
+console.warn: services.settings: main/partitioning-exempt-urls sync interrupted by shutdown
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1108: Error: Sqlite.jsm has been shutdown. Cannot open connection to: C:\Users\str8_\AppData\Local\Temp\rust_mozprofilegd7Z9A\protections.sqlite
