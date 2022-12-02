@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -11,9 +12,22 @@ import time
 
 title_search = input('Please insert search keyword: ')
 
+<<<<<<< HEAD
 def search_funct():
+=======
 
-    driver = webdriver.Firefox()
+
+def search_a_book():
+
+    title_search = input('Please insert search keyword: ')
+    print('Seeking. Please wait.')
+>>>>>>> b13faf7 (Implemented headless mode. Added requirements.txt)
+
+    option = Options()
+    option.headless = True
+    option.add_argument('window-size=1600x1000')
+
+    driver = webdriver.Firefox(options=option)
     driver.get('https://www.delfi.rs/')
     time.sleep(3)
     driver.find_element(By.ID,'autocomplete-input').send_keys(title_search)
@@ -52,7 +66,22 @@ def search_funct():
         except:
             pass
     else:
+<<<<<<< HEAD
         print('No matches, please type in correct keyword!')
+=======
+        print('Please enter a relevant keyword!')
+        driver.quit()        
+        search_a_book()
+
+    data_frame = pd.DataFrame(data)
+    data_frame.columns = ['Title','Author','Price']
+    print(data_frame)
+    csv = data_frame.to_csv("csv_results_delfi_book_scraper",index_label="No.", na_rep=None)
+    #print(delfi_book_scraper)
+
+    driver.quit()
+
+>>>>>>> b13faf7 (Implemented headless mode. Added requirements.txt)
     
 
 
