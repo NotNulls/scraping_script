@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
 set VIRTUAL_ENV=C:\Users\str8_\Desktop\Python_projects\pyjob_search\venv
+=======
+set VIRTUAL_ENV=C:\Users\str8_\Desktop\Python_projects\scrape_nba\venv
+>>>>>>> 8e0c4a7 (Cleaning code, setting searching criteria, singling out searched elements)
 
 if not defined PROMPT set PROMPT=$P$G
 

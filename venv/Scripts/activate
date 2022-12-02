@@ -37,7 +37,11 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+<<<<<<< HEAD
 VIRTUAL_ENV="C:\Users\str8_\Desktop\Python_projects\pyjob_search\venv"
+=======
+VIRTUAL_ENV="C:\Users\str8_\Desktop\Python_projects\scrape_nba\venv"
+>>>>>>> 8e0c4a7 (Cleaning code, setting searching criteria, singling out searched elements)
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
