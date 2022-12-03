@@ -1,6 +1,4 @@
-import requests
 from bs4 import BeautifulSoup
-from pprint import pprint
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
@@ -8,20 +6,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
+from selenium.common.exceptions import ElementClickInterceptedException, StaleElementReferenceException, TimeoutException, WebDriverException, InvalidSessionIdException
+import pandas as pd
 
-title_search = input('Please insert search keyword: ')
 
-<<<<<<< HEAD
-def search_funct():
-=======
 
 
 def search_a_book():
 
     title_search = input('Please insert search keyword: ')
     print('Seeking. Please wait.')
->>>>>>> b13faf7 (Implemented headless mode. Added requirements.txt)
 
     option = Options()
     option.headless = True
@@ -29,46 +23,58 @@ def search_a_book():
 
     driver = webdriver.Firefox(options=option)
     driver.get('https://www.delfi.rs/')
-    time.sleep(3)
+    driver.maximize_window()
     driver.find_element(By.ID,'autocomplete-input').send_keys(title_search)
 
+    wait = WebDriverWait(driver, 10)
 
     action =ActionChains(driver)
-    time.sleep(1)
     action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
 
+    cookie_catch =wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="uslovi"]')))
+    cookie_catch.click()
 
-    wait = WebDriverWait(driver,1)
-    time.sleep(2)
-    wait.until(EC.url_changes('https://www.delfi.rs/'))
+    search_result = driver.find_elements(By.CSS_SELECTOR, '.title-full-width h1')
+    s = [' '.join(s.text.split()) for s in search_result]
 
-    driver.find_element(By.CLASS_NAME,'modal-title')
-
-    soup = BeautifulSoup(driver.page_source, "html.parser")
-
+    list_of_pages = driver.find_elements(By.CLASS_NAME, "page-link")
 
 
-    search_result = soup.find_all('h1')
-    s = [' '.join(s.getText().split()) for s in search_result]
-    print(s)
-    print('----------')
-    print(s[1][0])
-    if s[1][0] != 0:
-        try:
+    data = []
+
+    #Check what the first result digit is. If > 0 means it has result hits. Proceeds further...
+    #print (s[0][0])
+
+    no_search_results = s[0][0]
+
+    if int(no_search_results) != 0:
         
-            d = driver
-            print(d.page_source)
-            soup = BeautifulSoup(driver.page_source,'html.parser')
+        for _ in range(len(list_of_pages[1:-1])):    
+            soup = BeautifulSoup(driver.page_source, "html.parser")
             find_by_class = soup.find_all(class_="body")
-            print(find_by_class)
-            e = [[",".join(e.getText().split())] for e in find_by_class if " ".join(e.getText().split()) != "Premium:"]
-            print(e)
-        except:
-            pass
+                
+            for i in find_by_class:
+                
+                title = ["".join(i.text) for i in i.find_all("a",class_="")][0]
+                author = ', '.join([(i.text) for i in i.find_all("a",class_="")][1:])
+                
+                try:
+                    price = [i.text.split() for i in i.find_all("span",class_="usteda1")][0][3]
+                except (IndexError):
+                    price = [i.text.split() for i in i.find_all("span",class_="price")][0][3]
+                driver.implicitly_wait(2)
+                
+
+                data.append([title,author, price])
+            try:
+                driver.maximize_window()
+                next_page = driver.find_element(By.CSS_SELECTOR,'.pagination .page-item:last-child .page-link')
+                next_page.click()
+            except (StaleElementReferenceException, ElementClickInterceptedException,TimeoutException, WebDriverException, InvalidSessionIdException):
+                pass
+        
+        print('.............................')
     else:
-<<<<<<< HEAD
-        print('No matches, please type in correct keyword!')
-=======
         print('Please enter a relevant keyword!')
         driver.quit()        
         search_a_book()
@@ -81,10 +87,6 @@ def search_a_book():
 
     driver.quit()
 
->>>>>>> b13faf7 (Implemented headless mode. Added requirements.txt)
     
 
 
-    driver.close()
-
-search_funct()
